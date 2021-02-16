@@ -1,0 +1,1 @@
+proyecto de reconocimiento de voz con ionic, una app que al decir red se cambia a rojo una seccion.
