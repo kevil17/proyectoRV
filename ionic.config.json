@@ -1,5 +1,7 @@
 {
   "name": "rvsincapacitor",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
