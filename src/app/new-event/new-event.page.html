@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>new-event</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Nombre de Evento</ion-label>
+      <ion-input [(ngModel)]="eventName"></ion-input>
+
+      <ion-label position="floating">Mensaje</ion-label>
+      <ion-input [(ngModel)]="eventMessage"></ion-input>
+
+      <ion-label position="floating">Fecha</ion-label>
+      <ion-input >
+        <ion-datetime value="" display-timezone="utc" [(ngModel)]="eventDate"></ion-datetime>
+      </ion-input>
+
+      <ion-label position="floating">Hora</ion-label>
+      <ion-input>
+        <ion-datetime displayFormat="h:mm a" [(ngModel)]="eventHour"></ion-datetime>
+      </ion-input>
+      
+    </ion-item>
+
+    <ion-button expand="block" (click)="addEvent()">Submit</ion-button>
+  </ion-list>
+  
+  <ion-list>
+    <ion-item-sliding *ngFor="let event of events">
+      <ion-item-options side="start">
+        <ion-item-option (click)="editEvent(event)">Edit</ion-item-option>
+      </ion-item-options>
+
+      <ion-item>
+        <ion-label>{{ event.name_event }}</ion-label>
+        <ion-label>{{ event.message }}</ion-label>
+        <ion-label>{{ event.date }}</ion-label>
+        <ion-label>{{ event.hour.substring(11,16) }}</ion-label>
+      </ion-item>
+       
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteEvent(event.id)">Delete</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="back()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

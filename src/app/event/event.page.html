@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>event</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Nombre de Evento</ion-label>
+      <ion-input [(ngModel)]="eventName"></ion-input>
+
+      <ion-label position="floating">Mensaje</ion-label>
+      <ion-input [(ngModel)]="eventMessage"></ion-input>
+
+      <ion-label position="floating">Fecha</ion-label>
+      <ion-input >
+        <ion-datetime value="" display-timezone="utc" [(ngModel)]="eventDate"></ion-datetime>
+      </ion-input>
+
+      <ion-label position="floating">Hora</ion-label>
+      <ion-input>
+        <ion-datetime displayFormat="h:mm a" [(ngModel)]="eventHour"></ion-datetime>
+      </ion-input>
+    </ion-item>
+        
+      
+  </ion-list>
+  <!-- boton de eliminar -->
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="deleteEvent()">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="back()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <!-- botones de ok y cancelar -->
+  <ion-footer>
+    <ion-button (click)="editDatabase()">OK</ion-button>
+    <ion-button (click)="cancel()">Cancel</ion-button>
+  </ion-footer>
+</ion-content>
