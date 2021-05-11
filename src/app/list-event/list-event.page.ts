@@ -8,15 +8,7 @@ import { DatabaseService } from '../database.service';
   styleUrls: ['./list-event.page.scss'],
 })
 export class ListEventPage implements OnInit {
-  eventName: string = "";
-  eventMessage: string = "";
-  eventDate: string = "";
-  eventHour: string = "";
-
   events: any = [];
-  editMode: boolean = false;
-  editId: number = 0;
-
   constructor(private router: Router, public database: DatabaseService,
                     private dataSrv: DataService) { 
     this.database.createDatabase().then(() => {
@@ -35,7 +27,6 @@ export class ListEventPage implements OnInit {
     this.router.navigate(['event']);
   }
   getEvents() {
-    
     this.database.getEvent().then((data) => {
       this.events = [];
       if (data.rows.length > 0) {
@@ -43,10 +34,8 @@ export class ListEventPage implements OnInit {
             this.events.push(data.rows.item(i));
         }
       }
-      
     });
   }
-
   deleteEvent(id: number) {
     this.database.deleteEvent(id).then((data) => {
       alert(data);
@@ -55,13 +44,7 @@ export class ListEventPage implements OnInit {
   }
 
   editEvent(event: any) {
-    /* this.editMode = true;
-    this.eventName = event.name_event;
-    this.eventMessage = event.message;
-    this.eventDate = event.date;
-    this.eventHour = event.hour;
-    this.editId = event.id; */
-    this.dataSrv.data= event;
+    this.dataSrv.data = event;
     this.router.navigate(['event']);
-  }
+  } 
 }
