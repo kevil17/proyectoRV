@@ -21,7 +21,7 @@ export class EventPage implements OnInit {
   list: ListEventPage;
   constructor(private router: Router, private route: ActivatedRoute, 
     public database: DatabaseService) {
-      this.database.createDatabase().then(() => {});
+      /* this.database.createDatabase().then(() => {}); */
 
     this.data = this.route.snapshot.data['data'];
     this.editMode = true;
@@ -41,7 +41,6 @@ export class EventPage implements OnInit {
     this.router.navigate(['list-event']);
   }
   editDatabase(){  // boton de ok
-      // edit category
       this.database
         .editEvent(this.eventName,this.eventMessage, this.eventDate, this.eventHour, this.editId)
         .then((data) => {

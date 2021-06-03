@@ -3,6 +3,8 @@ import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
 import { NavController, Platform  } from '@ionic/angular';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { Router } from '@angular/router';
+
+import { AlarmService } from '../alarm.service';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -14,7 +16,10 @@ export class HomePage {
   isRecording = false;
   constructor( public navCtrl: NavController,private speechRecognition: SpeechRecognition,
     private plt: Platform, private cd: ChangeDetectorRef, public speech:TextToSpeech,
-     private router: Router) {}
+     private router: Router, public alarm: AlarmService) {
+       this.alarm.createNotifications();
+      
+      }
   isIos() {
     return this.plt.is('ios');
   }
