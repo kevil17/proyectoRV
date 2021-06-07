@@ -77,45 +77,26 @@ export class NewEventPage implements OnInit {
           this.eventHour = "";
           (this.editMode = false), (this.editId = 0);
           alert(data);
+          this.alarm.createNotifications();
           this.getEvents();
         });
     } else {
       // add category
       this.database.addEvent(this.eventName, this.eventMessage, this.eventDate, this.eventHour).then((data) => {
-        // crear notificacion 
-        
-        /* this.localNotifications.schedule({
-          id: this.idAlert,
-          title: this.eventName ,
-          text:  this.eventMessage,
-          data: { mydata: 'Mi mensaje oculto es este schedule' },
-          trigger: { at: new Date(parseInt(this.eventDate.substring(0,10).split("-")[0]), (parseInt(this.eventDate.substring(0,10).split("-")[1])-1),(parseInt(this.eventDate.substring(0,10).split("-")[2])), (parseInt(this.eventHour.substring(11,16).split(":")[0])), (parseInt(this.eventHour.substring(11,16).split(":")[1])) ) }
-        }); */
-
-        // --------------------
         this.eventName = "";
         this.eventMessage = "";
         this.eventDate = "";
         this.eventHour = "";
         this.idAlert = this.idAlert + 1;
         alert(data);
+        this.alarm.createNotifications();
         this.getEvents();
       });
     }
     
   }
-/* 
-  getDato(){
-    this.alarm.database.getEvent().then((data) => {
-      this.datom="";
-      if (data.rows.length > 0) {        
-            this.datom = data.rows.item(0).message;
-      }
-    });
-    return this.datom;
-  } */
+  
   getEvents() {
-    
     this.database.getEvent().then((data) => {
       this.events = [];
       if (data.rows.length > 0) {
@@ -124,13 +105,12 @@ export class NewEventPage implements OnInit {
         }
       }
     });
-    
-    this.alarm.createNotifications();
   }
 
   deleteEvent(id: number) {
     this.database.deleteEvent(id).then((data) => {
       alert(data);
+      this.alarm.createNotifications();
       this.getEvents();
     });
   }
@@ -142,6 +122,7 @@ export class NewEventPage implements OnInit {
     this.eventDate = event.date;
     this.eventHour = event.hour;
     this.editId = event.id;
+    this.alarm.createNotifications();
   }
 
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from "@ionic-native/sqlite/ngx";
 
+/* import { AlarmService } from './alarm.service'; */
 @Injectable({
   providedIn: 'root'
 })
@@ -9,6 +10,7 @@ export class DatabaseService {
   tables = {
     events: "events",
   };
+  
   constructor(private sqlite: SQLite) { }
 
   async createDatabase() {
@@ -39,6 +41,7 @@ export class DatabaseService {
         []
       )
       .then(() => {
+        /* this.alarm.createNotifications(); */
         return "event created";
       })
       .catch((e) => {
@@ -48,6 +51,7 @@ export class DatabaseService {
 
         return "error on creating event " + JSON.stringify(e);
       });
+      
   }
 
   async getEvent() {
@@ -68,11 +72,13 @@ export class DatabaseService {
     return this.databaseObj
       .executeSql(`DELETE FROM ${this.tables.events} WHERE id = ${id}`, [])
       .then(() => {
+        /* this.alarm.createNotifications(); */
         return "event deleted";
       })
       .catch((e) => {
         return "error on deleting event " + JSON.stringify(e);
       });
+      
   }
 
   async editEvent(name: string, message: string, date: string, hour: string,  id: number) {
@@ -82,6 +88,7 @@ export class DatabaseService {
         []
       )
       .then(() => {
+        /* this.alarm.createNotifications(); */
         return "event updated";
       })
       .catch((e) => {
@@ -91,5 +98,7 @@ export class DatabaseService {
 
         return "error on updating event " + JSON.stringify(e);
       });
+      
   }
+  
 }

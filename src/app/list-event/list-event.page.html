@@ -13,9 +13,9 @@
 
       <ion-item >
         <ion-button expand="block" (click)="eventPage(event)">{{ event.name_event }}</ion-button>
-        <!-- <ion-label>{{ event.message }}</ion-label>
-        <ion-label>{{ event.date }}</ion-label>
-        <ion-label>{{ event.hour.substring(11,16) }}</ion-label> -->
+        <!-- <ion-label>{{ event.message }}</ion-label> -->
+        <ion-label>{{ event.date.substring(0,10) }}</ion-label>
+        <ion-label>{{ event.hour.substring(11,16) }}</ion-label>
       </ion-item>
        
       <ion-item-options side="end">

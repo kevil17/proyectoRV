@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { DatabaseService } from './database.service';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { AlertController, Platform } from '@ionic/angular';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,12 +17,15 @@ export class AlarmService {
   editId: number = 0;
 
   notfDelete: boolean = false;
-  constructor(public database: DatabaseService,
+  constructor( public database: DatabaseService,
     private localNotifications: LocalNotifications,
     private alertCtrl: AlertController, private plt: Platform) { 
+      
       this.database.createDatabase().then(() => {
         //this.getEvents();
-        //this.createNotifications();
+       /*  this.autostart.enable();
+        this.createNotifications();
+        this.autostart.disable(); */
       });
       // para mostrar los mensajes
       this.plt.ready().then(() => {
@@ -36,6 +41,7 @@ export class AlarmService {
         });
        });
     }
+    
     showAlert(title: any, text: any, msg: any) {
       this.alertCtrl.create({
         header: title,
@@ -45,6 +51,7 @@ export class AlarmService {
       }).then(alert => alert.present());
     }
     createNotifications() {
+      
       this.deleteNotifications();
       this.database.getEvent().then((data) => {
         this.events = [];
@@ -66,6 +73,8 @@ export class AlarmService {
           }
         }
       });
+      
+      /* this.autostart.enable(); */
     }
     deleteNotifications(){
         this.localNotifications.cancelAll();

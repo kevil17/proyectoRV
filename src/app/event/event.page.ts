@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatabaseService } from '../database.service';
 import { ListEventPage } from '../list-event/list-event.page';
+import { AlarmService } from '../alarm.service';
 @Component({
   selector: 'app-event',
   templateUrl: './event.page.html',
@@ -18,10 +19,8 @@ export class EventPage implements OnInit {
   events: any = [];
   editMode: boolean = false;
   editId: number = 0;
-  list: ListEventPage;
   constructor(private router: Router, private route: ActivatedRoute, 
-    public database: DatabaseService) {
-      /* this.database.createDatabase().then(() => {}); */
+    public database: DatabaseService, private alarm: AlarmService) {
 
     this.data = this.route.snapshot.data['data'];
     this.editMode = true;
@@ -50,23 +49,16 @@ export class EventPage implements OnInit {
           this.eventHour = "";
           (this.editId = 0);
           alert(data);
-          
+          this.alarm.createNotifications();  
         });  
-       //this.list.getEvents; 
         this.router.navigate(['home']);
   }
   deleteEvent() {  // boton de eliminar
     this.database.deleteEvent(this.editId).then((data) => {
       alert(data);
-      /* this.getEvents(); */
-      /* this.listevent.getEvents(); */
-    });
-    
+      this.alarm.createNotifications();
+    }); 
     this.router.navigate(['home']);
-    /* var list: ListEventPage;
-    list.getEvents(); */
   }
-  
-  
-  
+
 }

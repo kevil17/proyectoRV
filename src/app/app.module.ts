@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { AlarmService } from './alarm.service';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
