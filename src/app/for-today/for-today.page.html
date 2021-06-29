@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>for-today</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p>Hola soy para hoy</p>
+
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Nombre de Evento</ion-label>
+      <ion-input [(ngModel)]="eventName"></ion-input>
+
+      <ion-label position="floating">Mensaje</ion-label>
+      <ion-input [(ngModel)]="eventMessage"></ion-input>
+
+      <!--   <ion-label position="floating">Fecha</ion-label>
+      <ion-input >
+        <ion-datetime value="" display-timezone="utc" [(ngModel)]="eventDate"></ion-datetime>
+      </ion-input> -->
+    </ion-item>
+
+    <ion-item>
+      <ion-checkbox  slot="start" value="hour" id="idCheckHour" (click)="checketHour()"></ion-checkbox>
+      <ion-item>
+      <ion-label position="floating">Hora</ion-label>
+      <ion-input >
+        <ion-datetime  displayFormat="h:mm a" [(ngModel)]="eventHour"></ion-datetime>
+      </ion-input>
+      </ion-item>
+    </ion-item>
+    
+    <ion-item>  
+      <ion-checkbox  slot="start" value="" id="idCheckTime" (click)="checketTime()"></ion-checkbox>
+      <ion-item>
+        <ion-label position="floating">Dado un tiempo:</ion-label>
+        <ion-input >
+          <ion-datetime displayFormat="HH:mm" [(ngModel)]="hourMinutes"></ion-datetime>
+        </ion-input>
+      </ion-item>
+    </ion-item>
+
+    <ion-button expand="block" (click)="addEvent()">Agregar</ion-button>
+    <ion-button expand="block" (click)="testEvent()">Prueba</ion-button>
+  </ion-list>
+
+
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="back()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

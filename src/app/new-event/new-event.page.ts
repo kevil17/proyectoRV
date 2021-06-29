@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatabaseService } from '../database.service';
-// notificaciones locales y alert
-import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import { AlertController, Platform } from '@ionic/angular';
 import { AlarmService } from '../alarm.service';
 
 @Component({
@@ -23,41 +20,18 @@ export class NewEventPage implements OnInit {
   idAlert: number = 0;
 
   constructor(private router: Router, public database: DatabaseService,
-    private localNotifications: LocalNotifications,
-    private alertCtrl: AlertController, private plt: Platform, public alarm:AlarmService) { 
+        public alarm:AlarmService) { 
     this.database.createDatabase().then(() => {
       // will call get categories
       this.getEvents();
-     
-      //this.getAlarms();
     });
-    // para mostrar los mensajes
-    this.plt.ready().then(() => {
-      this.localNotifications.on('click').subscribe(res => {
-        console.log('click: ',res);
-        let msg = res.data ? res.data.mydata : '';
-        this.showAlert(res.title, res.text, msg);
-      });
-      this.localNotifications.on('trigger').subscribe(res => {
-        console.log('trigger: ',res);
-        let msg = res.data ? res.data.mydata : '';
-        this.showAlert(res.title, res.text, msg);
-      });
-     });
-  }
-  showAlert(title: any, text: any, msg: any) {
-    this.alertCtrl.create({
-      header: title,
-      subHeader: text,
-      message: msg,
-      buttons: ['Ok']
-    }).then(alert => alert.present());
+
   }
 
   ngOnInit() {
   }
   back(){
-    this.router.navigate(['home']);
+    this.router.navigate(['reminders']);
   }
   
   addEvent() {

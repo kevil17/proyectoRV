@@ -30,7 +30,19 @@ const routes: Routes = [
     resolve: {
       data: DataResolverService
     }
+  },  {
+    path: 'reminders',
+    loadChildren: () => import('./reminders/reminders.module').then( m => m.RemindersPageModule)
   },
+  {
+    path: 'betwen-week',
+    loadChildren: () => import('./betwen-week/betwen-week.module').then( m => m.BetwenWeekPageModule)
+  },
+  {
+    path: 'for-today',
+    loadChildren: () => import('./for-today/for-today.module').then( m => m.ForTodayPageModule)
+  },
+
 ];
 
 @NgModule({

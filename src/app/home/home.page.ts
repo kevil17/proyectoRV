@@ -5,6 +5,7 @@ import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { Router } from '@angular/router';
 
 import { AlarmService } from '../alarm.service';
+import { StringProcessingService } from '../string-processing.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ export class HomePage {
   isRecording = false;
   constructor( public navCtrl: NavController,private speechRecognition: SpeechRecognition,
     private plt: Platform, private cd: ChangeDetectorRef, public speech:TextToSpeech,
-     private router: Router, private alarm: AlarmService) {
+     private router: Router, private alarm: AlarmService, private stringProcessing: StringProcessingService) {
        this.alarm.createNotifications();
       }
       
@@ -42,14 +43,14 @@ export class HomePage {
  
   startListening() {
     let options = {
-      language: 'en-US'
+      language: 'es-ES',
     }
-    this.speechRecognition.startListening().subscribe(matches => {
+    this.speechRecognition.startListening(options).subscribe(matches => {
       this.matches = matches;
       this.cd.detectChanges();
       this.capture = this.matches[0];
-      
     });
+    
     this.isRecording = true;
   }
     
@@ -57,9 +58,10 @@ export class HomePage {
     this.speech.speak(this.capture)
     .then(() => console.log('Success'))
     .catch((reason: any) => console.log(reason));
+    alert(this.stringProcessing.processSpeech(this.capture));
   }
   newEvent(){
-    this.router.navigate(['new-event']);
+    this.router.navigate(['reminders']);
   }
   listEvent(){
     this.router.navigate(['list-event']);
